@@ -1,0 +1,62 @@
+﻿<Window x:Class="Homework_ImageClassify_App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Homework_ImageClassify_App"
+        xmlns:forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="400" Width="600">
+    <Window.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="ShowGridLines" Value="True"/>
+        </Style>
+        <DataTemplate x:Key="FeatureListItemDataTemplate" DataType="local:FeatureType">
+            <Button x:Name="feature_Btn" Content="{Binding}" Click="feature_Btn_Click"/>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid Background="AliceBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                <Button x:Name="UploadImage_Btn" Content="选择图片" Margin="0 0 10 0" Click="UploadImage_Btn_Click"/>
+                <CheckBox x:Name="DectectFace_CB" Content="检测人脸" IsChecked="True"/>
+            </StackPanel>
+            <WindowsFormsHost x:Name="winform1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <forms:PictureBox x:Name="Image_PB" SizeMode="Zoom" />
+            </WindowsFormsHost>
+        </Grid>
+        <Grid Grid.Column="1" Margin="10 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <ListView x:Name="featureSelect_LV" Grid.Row="0"
+                              SelectionMode="Extended" 
+                              ItemTemplate="{StaticResource FeatureListItemDataTemplate}">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel ScrollViewer.HorizontalScrollBarVisibility="Disabled" MaxWidth="250"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Padding" Value="0"/>
+                        <Setter Property="Margin" Value="5 5 10 5"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+            <RichTextBox x:Name="detectResult_Rtb" Grid.Row="1" VerticalAlignment="Stretch" BorderThickness="1" Margin="0 10" VerticalScrollBarVisibility="Auto"/>
+            <RichTextBox x:Name="relationInfo_Rtb" Grid.Row="2" VerticalAlignment="Stretch" BorderThickness="1" VerticalScrollBarVisibility="Auto"/>
+        </Grid>
+    </Grid>
+</Window>
