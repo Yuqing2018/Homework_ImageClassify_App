@@ -1,0 +1,7 @@
+[submodule "private/uwp/Barracuda/MusicCompanion/SurfaceJacumbaWindowsApp"]
+
+	path = private/uwp/Barracuda/MusicCompanion/SurfaceJacumbaWindowsApp
+	
+	url = https://hdgtfs/tfs/Surface/Joplin/_git/SurfaceJacumbaWindowsApp
+
+	branch = release/beta
